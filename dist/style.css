@@ -1,0 +1,15 @@
+.team-heading {
+    background-color: salmon;
+}
+
+.team-area {
+    flex-wrap : wrap;
+}
+
+.employee-card {
+    margin: 1rem;
+}
+
+.card-header {
+    background-color: lightblue;
+}
