@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-const util = require("util");
 const generateHtml = require("./src/generateHtml");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -62,7 +61,7 @@ function addTeamMember() {
         // if user selected 'Done', we go in the else statement
         else {
             // TODO: call function in generateHtml to generate HTML page
-    
+            fs.writeFile("./dist/index.html", generateHtml(team), (err) => err ? console.error(err) : console.log("Success!"));
             return; // end function call
         }
     })
