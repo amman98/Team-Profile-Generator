@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const util = require("util");
 const generateHtml = require("./src/generateHtml");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -61,22 +62,73 @@ function addTeamMember() {
         // if user selected 'Done', we go in the else statement
         else {
             // TODO: call function in generateHtml to generate HTML page
-
+    
             return; // end function call
         }
-
-        addTeamMember(); // recursively call function to add more team members
     })
+
 }
 
 // handles prompting user for engineer information
 function addEngineer() {
-
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the engineer's name?",
+                name: "engineerName",
+            },
+            {
+                type: "input",
+                message: "What is the engineer's id?",
+                name: "engineerId",
+            },
+            {
+                type: "input",
+                message: "What is the engineer's email?",
+                name: "engineerEmail",
+            },
+            {
+                type: "input",
+                message: "What is the engineer's github username?",
+                name: "engineerGithub",
+            },
+    ]).then(ans => {
+        const engineer = new Engineer(ans.engineerName, ans.engineerId, ans.engineerEmail, ans.engineerGithub);
+        team.push(engineer); // add engineer to team array
+        addTeamMember(); // recursively call function to add more team members
+    })
 }
 
 // handles prompting user for intern information
 function addIntern() {
-
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is the intern's name?",
+                name: "internName",
+            },
+            {
+                type: "input",
+                message: "What is the intern's id?",
+                name: "internId",
+            },
+            {
+                type: "input",
+                message: "What is the intern's email?",
+                name: "internEmail",
+            },
+            {
+                type: "input",
+                message: "What is the intern's school?",
+                name: "internSchool",
+            },
+    ]).then(ans => {
+        const intern = new Intern(ans.internName, ans.internId, ans.internEmail, ans.internSchool);
+        team.push(intern); // add intern to team array
+        addTeamMember(); // recursively call function to add more team members
+    })
 }
 
 createManager(); // start by prompting user to add manager
